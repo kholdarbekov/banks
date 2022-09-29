@@ -1,3 +1,17 @@
+Solution contains in banks.py file. To run this file you can provide Env variables or use the default values for new csv file name, header names, etc.
+
+List of Environment variables that you can provide is given below:
+
+- CSV_OUTPUT_FILE_NAME - New CSV filename that is combined from given csv files. Default is 'combined.csv'
+- CSV_TIME_HEADER - Header name for transaction time. Default is 'transaction_time'
+- CVS_TYPE_HEADER - Header name for transaction type. Default is 'transaction_type'
+- CVS_AMOUNT_HEADER - Header name for transaction amount. Default is 'transaction_amount'
+- CVS_TO_HEADER - Header name for transaction to. Default is 'transaction_to'
+- CVS_FROM_HEADER - Header name for transaction from. Default is 'transaction_from'
+- TRANSACTION_TIME_TO_FORMAT - Transaction time format in newly created file. Default is '%d.%m.%Y'
+- CSV_FILES_AND_PARSERS - Json of csv_files as key and parsers as value. Currently available parsers are Parser1, Parser2, and Parser3 Default is '{"bank1.csv":"Parser1","bank2.csv":"Parser2","bank3.csv":"Parser3"}'
+
+
 ### SOBERS Assignment
 
 # Introduction
