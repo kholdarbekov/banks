@@ -248,7 +248,7 @@ def get_parser(name: str) -> Type[AbstractParser]:
         raise ValueError(f"Parser class with name {name} not found")
 
 
-if __name__ == "__main__":
+def main():
     load_dotenv()
     cvs_to_parser_dict = {}
     CSV_FILES_AND_PARSERS = json.loads(
@@ -261,3 +261,7 @@ if __name__ == "__main__":
         cvs_to_parser_dict[cvs_file] = get_parser(parser)
     csv_formatter = CSVFormatter(cvs_to_parser_dict)
     csv_formatter.consolidate()
+
+
+if __name__ == "__main__":
+    main()

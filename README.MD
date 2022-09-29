@@ -11,6 +11,11 @@ List of Environment variables that you can provide is given below:
 - TRANSACTION_TIME_TO_FORMAT - Transaction time format in newly created file. Default is '%d.%m.%Y'
 - CSV_FILES_AND_PARSERS - Json of csv_files as key and parsers as value. Currently available parsers are Parser1, Parser2, and Parser3 Default is '{"bank1.csv":"Parser1","bank2.csv":"Parser2","bank3.csv":"Parser3"}'
 
+## Requirements
+- python-dotenv
+- pytest
+
+--
 
 ### SOBERS Assignment
 

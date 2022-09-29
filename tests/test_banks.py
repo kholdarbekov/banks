@@ -1,6 +1,8 @@
+import os
 import pytest
+from io import BytesIO
 from datetime import datetime
-from banks import Parser1, Parser2, Parser3
+from banks import Parser1, Parser2, Parser3, main
 
 
 def test_parsers():
@@ -47,3 +49,32 @@ def test_parsers():
     parser.set_line("5 Oct 2019,add,5,44,182")
     with pytest.raises(IndexError):
         parser.get_transaction_from()
+
+
+def test_e2e():
+    TEST_CSV_1 = """timestamp,type,amount,to,from
+Oct 1 2019,remove,99.10,182,198
+"""
+    TEST_CSV_2 = """date,transaction,amounts,to,from
+03-10-2019,remove,99.99,182,198
+"""
+
+    with open("test_csv_1.csv", "w") as test_file:
+        test_file.write(TEST_CSV_1)
+    
+    with open("test_csv_2.csv", "w") as test_file:
+        test_file.write(TEST_CSV_2)
+    
+    os.environ["CSV_FILES_AND_PARSERS"] = '{"test_csv_1.csv":"Parser1","test_csv_2.csv":"Parser2"}'
+
+    main()
+
+    with open("combined.csv") as file:
+        # TRANSACTION_TIME_TO_FORMAT=%d.%m.%Y
+        assert file.readline() == "transaction_time,transaction_type,transaction_amount,transaction_to,transaction_from\n"
+        assert file.readline() == "01.10.2019,remove,99.10,182,198\n"
+        assert file.readline() == "03.10.2019,remove,99.99,182,198\n"
+
+    os.remove("test_csv_1.csv")
+    os.remove("test_csv_2.csv")
+    os.remove("combined.csv")
